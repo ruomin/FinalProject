@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/Nutrition"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_column="0"
+        android:layout_row="0"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:src="@drawable/nutrition" />
+
+    <ImageView
+        android:id="@+id/CBC"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_column="1"
+        android:layout_row="0"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:src="@drawable/cbc" />
+
+    <ImageView
+        android:id="@+id/Movie"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_column="0"
+        android:layout_row="1"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:src="@drawable/movie" />
+
+    <ImageView
+        android:id="@+id/OCTranspo"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_column="1"
+        android:layout_columnWeight="1"
+        android:layout_row="1"
+        android:layout_rowWeight="1"
+
+        android:src="@drawable/oc" />
+
+
+</GridLayout>

@@ -1,9 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OCTranspo">
+    tools:context=".OCTranspo"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/welcomeO"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:text="@string/welcome"
+        android:textSize="30sp" />
+
+
+    <EditText
+        android:id="@+id/userEnter"
+        android:layout_below="@+id/welcomeO"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint"
+        />
+    <Button
+        android:id="@+id/byRoute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userEnter"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center"
+
+        android:text="@string/byRoute" />
+
+    <Button
+        android:id="@+id/byStop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/byRoute"
+        android:layout_alignParentBottom="true"
+
+        android:layout_gravity="center"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="295dp"
+        android:text="@string/byStop" />
+
+
+    <ProgressBar
+        android:id="@+id/progressBarO"
+        android:layout_alignStart="@+id/byStop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        style="?android:attr/progressBarStyleHorizontal"/>
+
+    <Button
+        android:id="@+id/goHomeO"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/goHome"
+        android:layout_alignParentBottom="true"
+
+
+
+        />
+
+</RelativeLayout>

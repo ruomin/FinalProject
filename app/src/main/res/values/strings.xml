@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">FinalProject</string>
+    <string name="searchButton">search</string>
+    <string name="homeButton">To Home Page</string>
+    <string name="dialog_message">Do You Want To Go Home Page?</string>
+    <string name="dialog_title">Warning</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="home_message">Well Come Back To Home</string>
 </resources>

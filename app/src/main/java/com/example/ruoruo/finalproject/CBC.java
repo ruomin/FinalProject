@@ -17,7 +17,7 @@ import android.widget.Toast;
 public class CBC extends Activity {
 
     protected static final String ACTIVITY_NAME = "CBC";
-    private Button searchButton;
+    private Button searchButton, saveButton,quitButton;
     private ImageView imageView;
     private EditText editText;
 
@@ -28,13 +28,15 @@ public class CBC extends Activity {
         setContentView(R.layout.activity_cbc);
         Log.i(ACTIVITY_NAME, "In onCreate()");
         searchButton = (Button) findViewById(R.id.cbc_search);
+        saveButton = (Button) findViewById(R.id.cbc_save);
         imageView = (ImageView) findViewById(R.id.cbc_image_welcome);
         editText = (EditText) findViewById(R.id.cbc_editText);
+        quitButton = (Button) findViewById(R.id.cbc_quit);
 
-        editText.setOnClickListener(new View.OnClickListener() {
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"You click the Edit text.", Toast.LENGTH_LONG ).show();
+                Toast.makeText(getApplicationContext(),"You clicked the save Button.", Toast.LENGTH_LONG ).show();
             }
         });
 
@@ -51,7 +53,7 @@ public class CBC extends Activity {
         });
 
 
-        imageView.setOnClickListener(new View.OnClickListener() {
+        quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();

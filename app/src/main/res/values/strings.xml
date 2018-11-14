@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FinalProject</string>
+    <string name="cbc_search">Search</string>
+    <string name="cbc_editText">Type the title of the article</string>
 </resources>

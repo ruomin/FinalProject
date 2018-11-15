@@ -25,5 +25,10 @@
     <string name="cbc_search">Search</string>
     <string name="cbc_editText">Type the title of the article</string>
 
+    <!--Nutrition-->
+    <string name="NutritionButton">Nutrition</string>
+    <string name="Hint">Search Database</string>
+    <string name="ExitButton">Exit</string>
+
 
 </resources>

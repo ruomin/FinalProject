@@ -37,6 +37,7 @@
 
         android:text="@string/byRoute" />
 
+
     <Button
         android:id="@+id/byStop"
         android:layout_width="match_parent"

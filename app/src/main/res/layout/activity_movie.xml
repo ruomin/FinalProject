@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Movie">
+    tools:context=".MovieActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -23,7 +23,7 @@
         android:text="@string/homeButton" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/searchEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -37,6 +37,7 @@
         android:text="@string/searchButton" />
 
     <ListView
+        android:id="@+id/listViewMovie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

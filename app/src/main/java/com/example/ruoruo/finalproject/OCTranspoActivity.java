@@ -2,8 +2,6 @@ package com.example.ruoruo.finalproject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,17 +9,13 @@ import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.Toast;
 
-import static android.widget.Toast.LENGTH_LONG;
-
-public class OCTranspo extends Activity {
+public class OCTranspoActivity extends Activity {
 
 
-    protected static final String ACTIVITY_NAME = "OCTranspo";
+    protected static final String ACTIVITY_NAME = "OCTranspoActivity";
     private Button byRoute;
     private Button byStop;
     private EditText userEnter;
@@ -58,7 +52,7 @@ public class OCTranspo extends Activity {
         goHomeO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog dialog = new AlertDialog.Builder(OCTranspo.this)
+                AlertDialog dialog = new AlertDialog.Builder(OCTranspoActivity.this)
                         .setTitle("Notice!")
                         .setMessage("You are leaving the page!")
 
@@ -72,7 +66,7 @@ public class OCTranspo extends Activity {
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(OCTranspo.this,MainActivity.class);
+                                Intent intent = new Intent(OCTranspoActivity.this,MainActivity.class);
                                 startActivity(intent);
                                 dialog.dismiss();
                             }

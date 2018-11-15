@@ -2,12 +2,10 @@ package com.example.ruoruo.finalproject;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -50,7 +48,7 @@ public class MainActivity extends Activity {
         movie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Movie.class);
+                Intent intent = new Intent(MainActivity.this, MovieActivity.class);
                 startActivity(intent);
                 Log.i(ACTIVITY_NAME, "In onClick()");
             }
@@ -59,7 +57,7 @@ public class MainActivity extends Activity {
         octranspo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, OCTranspo.class);
+                Intent intent = new Intent(MainActivity.this, OCTranspoActivity.class);
                 startActivity(intent);
                 Log.i(ACTIVITY_NAME, "In onClick()");
             }

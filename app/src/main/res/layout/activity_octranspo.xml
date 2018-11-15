@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OCTranspo"
+    tools:context=".OCTranspoActivity"
     android:orientation="vertical">
 
     <TextView
@@ -65,9 +65,13 @@
         android:layout_height="wrap_content"
         android:text="@string/goHome"
         android:layout_alignParentBottom="true"
-
-
-
         />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="40dp" />
 
 </RelativeLayout>

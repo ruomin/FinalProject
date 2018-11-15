@@ -88,6 +88,9 @@ public class CBC extends Activity {
         Log.i(ACTIVITY_NAME, "In onDestroy()");
     }
 
+    /**
+     *
+     */
     private void showDialog() {
         Dialog dialog=new AlertDialog.Builder(this)
                 .setTitle("Exit the application?")//set the title

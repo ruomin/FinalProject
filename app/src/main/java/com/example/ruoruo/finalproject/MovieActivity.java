@@ -1,7 +1,6 @@
 package com.example.ruoruo.finalproject;
 
 import android.app.Activity;
-import android.app.AppComponentFactory;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,20 +14,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Movie extends AppCompatActivity {
+/**
+ *
+ */
+public class MovieActivity extends AppCompatActivity {
 
-    protected static final String ACTIVITY_NAME = "Movie";
+    protected static final String ACTIVITY_NAME = "MovieActivity";
 
-    Button btnSearchMovie;
+    /**
+     *
+     */
+    private Button btnSearchMovie;
 
-    Toolbar toolbar;
+    private Toolbar toolbar;
 
-    Button home;
+    private Button novieToHomeButton;
 
 
 
@@ -37,10 +41,10 @@ public class Movie extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
 
-        Toast toast = Toast.makeText(Movie.this, "Well come to movie world!",Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(MovieActivity.this, "Well come to movie world!",Toast.LENGTH_SHORT);
         toast.show(); //display message box
 
-        home = findViewById(R.id.homeButton);
+        novieToHomeButton = findViewById(R.id.homeButton);
 
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Movie");
@@ -60,10 +64,10 @@ public class Movie extends AppCompatActivity {
             }
         });
 
-        home.setOnClickListener(new View.OnClickListener(){
+        novieToHomeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Movie.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MovieActivity.this);
                 builder.setMessage(R.string.dialog_message);
                 builder.setTitle(R.string.dialog_title)
 

@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class CBC extends Activity {
@@ -32,6 +31,8 @@ public class CBC extends Activity {
         imageView = (ImageView) findViewById(R.id.cbc_image_welcome);
         editText = (EditText) findViewById(R.id.cbc_editText);
         quitButton = (Button) findViewById(R.id.cbc_quit);
+
+
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +92,7 @@ public class CBC extends Activity {
         Dialog dialog=new AlertDialog.Builder(this)
                 .setTitle("Exit the application?")//set the title
                 .setMessage("Are you sure you want to exit this page?")//set the context
+                .setIcon(R.drawable.cbcquit)
                 //confirm button
                 .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override

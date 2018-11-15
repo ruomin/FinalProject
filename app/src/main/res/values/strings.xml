@@ -2,4 +2,7 @@
     <string name="app_name">FinalProject</string>
     <string name="cbc_search">Search</string>
     <string name="cbc_editText">Type the title of the article</string>
+    <string name="cbc_button_save">Save</string>
+    <string name="cbc_button_quit">Quit</string>
+    <string name="cbc_button_search">Search</string>
 </resources>

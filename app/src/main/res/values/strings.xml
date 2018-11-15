@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">FinalProject</string>
-<--! OC_Transport>
+
+    <!--OC_Transport-->
     <string name="desc">Image</string>
     <string name="welcome">Welcome to OC Transport!</string>
     <string name="select">Please select only one route below!</string>
@@ -10,9 +11,7 @@
     <string name="hint">Please enter the route number or stop number</string>
 
 
-
-<--!movie>
-
+    <!--movie-->
     <string name="searchButton">search</string>
     <string name="homeButton">To Home Page</string>
     <string name="dialog_message">Do You Want To Go Home Page?</string>
@@ -20,7 +19,6 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="home_message">Well Come Back To Home</string>
-
 
 
     <!--CBCNEWS-->

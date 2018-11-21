@@ -13,9 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class CBC extends Activity {
+public class CBCNewsActivity extends Activity {
 
-    protected static final String ACTIVITY_NAME = "CBC";
+    protected static final String ACTIVITY_NAME = "CBCNewsActivity";
     private Button searchButton, saveButton,quitButton;
     private ImageView imageView;
     private EditText editText;

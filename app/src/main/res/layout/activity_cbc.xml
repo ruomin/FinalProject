@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".CBC">
+    tools:context=".CBCNewsActivity">
 
     //build the image for CBC welcome ICON by using ImageView
     <ImageView

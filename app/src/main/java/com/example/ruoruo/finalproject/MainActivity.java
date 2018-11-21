@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
         nutrition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Nutrition.class);
+                Intent intent = new Intent(MainActivity.this, NutritionActivity.class);
                 startActivity(intent);
                 Log.i(ACTIVITY_NAME, "In onClick()");
             }
@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
         cbc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CBC.class);
+                Intent intent = new Intent(MainActivity.this, CBCNewsActivity.class);
                 startActivity(intent);
                 Log.i(ACTIVITY_NAME, "In onClick()");
             }

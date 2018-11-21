@@ -12,9 +12,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class Nutrition extends Activity {
+public class NutritionActivity extends Activity {
 
-    protected static final String ACTIVITY_NAME = "Nutrition";
+    protected static final String ACTIVITY_NAME = "NutritionActivity";
 
     Button buttonclick;
     Button Exit;
@@ -27,7 +27,7 @@ public class Nutrition extends Activity {
         buttonclick = findViewById(R.id.clickableButton);
         Exit = findViewById(R.id.clickableButton2);
 
-        Toast.makeText(Nutrition.this,"Nutrition is the best!", Toast.LENGTH_LONG).show();
+        Toast.makeText(NutritionActivity.this,"Nutrition is the best!", Toast.LENGTH_LONG).show();
 
         buttonclick.setOnClickListener(new View.OnClickListener() {
             @Override

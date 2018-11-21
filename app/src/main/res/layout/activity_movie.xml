@@ -8,45 +8,62 @@
     tools:context=".MovieActivity">
 
     <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        />
+        android:layout_width="match_parent" />
 
-    <Button
-        android:id="@+id/homeButton"
+
+
+    <android.support.v4.widget.DrawerLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/homeButton" />
+        android:layout_height="match_parent"
+        android:id="@+id/activity_toolbar">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
 
     <EditText
         android:id="@+id/searchEditText"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="@string/search_movie_title" />
 
     <Button
         android:id="@+id/buttonSearchMovie"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/searchEditText"
         android:text="@string/searchButton" />
 
     <ListView
         android:id="@+id/listViewMovie"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchEditText"
+        />
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom" />
+        android:layout_below="@+id/searchEditText"/>
+
+        <Button
+            android:id="@+id/testAsyncTaskButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/TestAsyncTask"
+            android:layout_below="@+id/progressBar"/>
+
+    </RelativeLayout>
 
 
+
+    </android.support.v4.widget.DrawerLayout>
 </LinearLayout>

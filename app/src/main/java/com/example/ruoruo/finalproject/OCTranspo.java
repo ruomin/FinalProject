@@ -1,24 +1,23 @@
 package com.example.ruoruo.finalproject;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Switch;
+import android.widget.ListView;
 import android.widget.Toast;
 
-import static android.widget.Toast.LENGTH_LONG;
-
-public class OCTranspo extends Activity {
+public class OCTranspo extends AppCompatActivity {
 
 
     protected static final String ACTIVITY_NAME = "OCTranspo";
@@ -26,6 +25,74 @@ public class OCTranspo extends Activity {
     private Button byStop;
     private EditText userEnter;
     private Button goHomeO;
+    private Toolbar ocToolBar;
+    private ListView listViewStops;
+    private Cursor cursor;
+
+    private EditText editTextSearchRoute;
+
+
+
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menuoct,menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        Intent intent;
+
+
+        switch(id){
+
+            case R.id.switchToNutrition:
+                intent = new Intent(this, Nutrition.class);
+                startActivity(intent);
+                break;
+
+            case R.id.switchTocbc:
+                intent= new Intent(this, CBC.class);
+                startActivity(intent);
+                break;
+
+            case R.id.switchTomovie:
+             intent= new Intent(this, Movie.class);
+                startActivity(intent);
+
+                break;
+
+            case R.id.switchToHome:
+                intent= new Intent(this, MainActivity.class);
+                startActivity(intent);
+
+                break;
+
+            case R.id.help:
+                 AlertDialog.Builder message = new AlertDialog.Builder(OCTranspo.this);
+                 message.setMessage("Message");
+                 message.setTitle("Title").show();
+
+                break;
+            /**
+             * when click exit, a dialog warning comes out to ask the user whether exit the application or not
+             */
+            case R.id.exit:
+
+                break;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +104,11 @@ public class OCTranspo extends Activity {
          Button byStop = (Button)findViewById(R.id.byStop);
          EditText userEnter = (EditText)findViewById(R.id.userEnter);
          Button goHomeO = (Button)findViewById(R.id.goHomeO);
+
+        ocToolBar = (Toolbar) findViewById(R.id.OCToolBar);
+        setSupportActionBar(ocToolBar);
+        ocToolBar.setTitle("OC Transpo");
+        ocToolBar.setSubtitle("Tool Bar");
 
         Toast.makeText(getApplicationContext(), "message", Toast.LENGTH_SHORT).show();
 
@@ -50,7 +122,9 @@ public class OCTranspo extends Activity {
         byStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make( v, "message", Snackbar.LENGTH_LONG).show();
+                Intent intent = new Intent(OCTranspo.this, framlayout.class);
+                startActivity(intent);
+                Log.i(ACTIVITY_NAME, "In onClick()");
             }
         });
 
@@ -80,10 +154,6 @@ public class OCTranspo extends Activity {
                 dialog.show();
             }
         });
-
-
-
-
 
 
     }

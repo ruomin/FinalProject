@@ -61,6 +61,14 @@
             android:text="@string/TestAsyncTask"
             android:layout_below="@+id/progressBar"/>
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_below="@+id/testAsyncTaskButton"
+            >
+
+        </FrameLayout>
+
     </RelativeLayout>
 
 

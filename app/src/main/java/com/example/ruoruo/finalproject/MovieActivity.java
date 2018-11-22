@@ -91,30 +91,35 @@ public class MovieActivity extends AppCompatActivity {
         MovieAdapter movieAdapter = new MovieAdapter(arrayList,this);
 
         /**
-         * add toolbar to the page
+         * add MovieToolbar to the page
          */
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.movieToolbar);
         setSupportActionBar(toolbar);
         /**
          * find search movie button and set on click listener
          */
         btnSearchMovie = findViewById(R.id.buttonSearchMovie);
 
+        /**
+         * Test Fragment
+         */
         btnSearchMovie.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                    MovieFragment myFragment = new MovieFragment();
+                    getFragmentManager().beginTransaction().replace(R.id.testFragment, myFragment).commit();
 
-                inputMovieSearch = editTextSearchMovieTitle.getText().toString();
-
-                MovieResult messageResult = new MovieResult(-1, inputMovieSearch);
-                arrayList.add(messageResult);
-                movieAdapter.notifyDataSetChanged();
-
-                ContentValues values = new ContentValues();
-                values.put(MovieDatabaseHelper.KEY_MESSAGE, inputMovieSearch);
-                db.insert(TABLE_NAME, "null", values);
-
-                editTextSearchMovieTitle.setText("");
+//                inputMovieSearch = editTextSearchMovieTitle.getText().toString();
+//
+//                MovieResult messageResult = new MovieResult(-1, inputMovieSearch);
+//                arrayList.add(messageResult);
+//                movieAdapter.notifyDataSetChanged();
+//
+//                ContentValues values = new ContentValues();
+//                values.put(MovieDatabaseHelper.KEY_MESSAGE, inputMovieSearch);
+//                db.insert(TABLE_NAME, "null", values);
+//
+//                editTextSearchMovieTitle.setText("");
             }
         });
         /**
@@ -139,7 +144,9 @@ public class MovieActivity extends AppCompatActivity {
 //
 //        });
         Log.i(ACTIVITY_NAME, "In onCreate()");
-
+        /**
+         * test AsyncTask
+         */
         btn_testAsyncTask = findViewById(R.id.testAsyncTaskButton);
         btn_testAsyncTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,7 +167,7 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     /**
-     * use switch case to set toolbar action
+     * use switch case to set MovieToolbar action
      * @param item
      * @return item
      */
@@ -274,6 +281,9 @@ public class MovieActivity extends AppCompatActivity {
         Log.i(ACTIVITY_NAME, "In onDestroy()");
     }
 
+    /**
+     * Database
+     */
     private void getAllMessageFromDb() {
         cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
         cursor.moveToFirst();

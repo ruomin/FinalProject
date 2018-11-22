@@ -25,7 +25,7 @@
         <activity android:name=".MovieActivity" />
         <activity android:name=".MovieDetail"></activity>
         <activity android:name=".MovieFragment"></activity>
-        <activity android:name=".toolbar" />
+        <activity android:name=".MovieToolbar" />
     </application>
 
 </manifest>

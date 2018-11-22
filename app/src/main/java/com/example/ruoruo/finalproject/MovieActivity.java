@@ -162,7 +162,7 @@ public class MovieActivity extends AppCompatActivity {
 
 
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu,menu);
+        getMenuInflater().inflate(R.menu.movie_menu,menu);
         return true;
     }
 

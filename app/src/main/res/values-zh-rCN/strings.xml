@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--movie-->
     <string name="app_name">期末项目</string>
     <string name="button">查找</string>
     <string name="homeButton">回到主页</string>
@@ -9,6 +10,11 @@
     <string name="ok">好</string>
     <string name="cancel">取消</string>
     <string name="home_message">请重新选择想要去的程序</string>
+    <string name="TestAsyncTask">测试 AsyncTask</string>
+    <string name="dialog_help_message"> 作者: 张若旻 \n 版本: 2.0 \n 关于: 可以查找电影</string>
+    <string name="dialog_help_title">帮助</string>
+    <string name="search_movie_title">查找电影</string>
+    <string name="movie_warning_snackbar">已经在电影频道啦！</string>
 
     <!--CBCNEWS-->
     <string name="cbc_search">搜索</string>
@@ -21,4 +27,7 @@
     <string name="cbc_button_frame"> 前往Frame Layout</string>
     <string name="cbc_frame_change_button">变化布局</string>
     <string name="cbc_asy_button">AsyncTask</string>
+    <string name="cbc_item_help">帮助</string>
+    <string name="cbc_item_exit">退出</string>
+
 </resources>

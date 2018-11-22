@@ -160,7 +160,11 @@ public class MovieActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * add option menu
+     * @param menu
+     * @return
+     */
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.movie_menu,menu);
         return true;
@@ -216,7 +220,7 @@ public class MovieActivity extends AppCompatActivity {
                 builder = new AlertDialog.Builder(MovieActivity.this);
                     builder.setMessage(R.string.dialog_help_message);
                     builder.setTitle(R.string.dialog_help_title)
-                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 onStop();
                                 // User cancelled the dialog

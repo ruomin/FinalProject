@@ -3,7 +3,7 @@
 
     <!--OC_Transport-->
     <string name="desc">Image</string>
-    <string name="welcome">Welcome to OC Transport!</string>
+    <string name="welcomeOCTitle">Welcome to OC Transport!</string>
     <string name="select">Please select only one route below!</string>
     <string name="byRoute">Search By Route</string>
     <string name="byStop">Search By Stop</string>
@@ -17,7 +17,7 @@
     <string name="dialog_message">Do You Want To Go Home Page?</string>
     <string name="dialog_title">Warning</string>
     <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
+    <string name="no">Cancel</string>
     <string name="home_message">Well Come Back To Home</string>
     <string name="TestAsyncTask">Test AsyncTask</string>
     <string name="dialog_help_message"> Author: Ruomin Zhang \n Version: 2.0 \n About the Application: You can use it to search movies and see the detail of the movie</string>
@@ -44,6 +44,9 @@
     <string name="NutritionButton">Nutrition</string>
     <string name="Hint">Search Database</string>
     <string name="ExitButton">Exit</string>
-
+    <string name="FragmentButton">Fragment Image</string>
+    <string name="Information">Author is James Barclay \n Version: 2.1 \n This Application allows you to do research on nutritional facts and save it to your favorites</string>
+    <string name="Title">Help</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class framlayout extends Activity {
+public class OCTframlayout extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

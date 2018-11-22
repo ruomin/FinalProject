@@ -17,7 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class OCTranspo extends AppCompatActivity {
+public class OCTranspoActivity extends AppCompatActivity {
 
 
     protected static final String ACTIVITY_NAME = "OCTranspo";
@@ -52,17 +52,17 @@ public class OCTranspo extends AppCompatActivity {
         switch(id){
 
             case R.id.switchToNutrition:
-                intent = new Intent(this, Nutrition.class);
+                intent = new Intent(this, NutritionActivity.class);
                 startActivity(intent);
                 break;
 
             case R.id.switchTocbc:
-                intent= new Intent(this, CBC.class);
+                intent= new Intent(this, CBCNewsActivity.class);
                 startActivity(intent);
                 break;
 
             case R.id.switchTomovie:
-             intent= new Intent(this, Movie.class);
+             intent= new Intent(this, MovieActivity.class);
                 startActivity(intent);
 
                 break;
@@ -74,15 +74,9 @@ public class OCTranspo extends AppCompatActivity {
                 break;
 
             case R.id.help:
-                 AlertDialog.Builder message = new AlertDialog.Builder(OCTranspo.this);
+                 AlertDialog.Builder message = new AlertDialog.Builder(OCTranspoActivity.this);
                  message.setMessage("Message");
                  message.setTitle("Title").show();
-
-                break;
-            /**
-             * when click exit, a dialog warning comes out to ask the user whether exit the application or not
-             */
-            case R.id.exit:
 
                 break;
 
@@ -122,7 +116,7 @@ public class OCTranspo extends AppCompatActivity {
         byStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OCTranspo.this, framlayout.class);
+                Intent intent = new Intent(OCTranspoActivity.this, OCTframlayout.class);
                 startActivity(intent);
                 Log.i(ACTIVITY_NAME, "In onClick()");
             }
@@ -132,7 +126,7 @@ public class OCTranspo extends AppCompatActivity {
         goHomeO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog dialog = new AlertDialog.Builder(OCTranspo.this)
+                AlertDialog dialog = new AlertDialog.Builder(OCTranspoActivity.this)
                         .setTitle("Notice!")
                         .setMessage("You are leaving the page!")
 
@@ -146,7 +140,7 @@ public class OCTranspo extends AppCompatActivity {
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(OCTranspo.this,MainActivity.class);
+                                Intent intent = new Intent(OCTranspoActivity.this,MainActivity.class);
                                 startActivity(intent);
                                 dialog.dismiss();
                             }

@@ -1,10 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">FinalProject</string>
-    <string name="NutritionButton">Nutrition</string>
+    <string name="NutritionButton">Nutriment</string>
     <string name="Hint">Search Database</string>
-    <string name="ExitButton">Exit</string>
+    <string name="ExitButton">Way Out</string>
     <string name="FragmentButton">Fragment Image</string>
     <string name="Information">Author is James Barclay \n Version: 2.1 \n This Application allows you to do research on nutritional facts and save it to your favorites</string>
-    <string name="Title">Help</string>
+    <string name="Title">Help!</string>
     <string name="cancel">Cancel</string>
 </resources>

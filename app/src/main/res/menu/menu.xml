@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nutritionItem"
+        android:icon="@drawable/nutrition"
+        android:orderInCategory="100"
+        android:title="nutrition"
+        android:visible="true"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/cbcNewsNutrition"
+        android:icon="@drawable/cbc"
+        android:orderInCategory="100"
+        android:title="cbcnews"
+        android:visible="true"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/movieNutrition"
+        android:icon="@drawable/movie"
+        android:orderInCategory="100"
+        android:title="movie"
+        android:visible="true"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/OCTranspoNutrition"
+        android:icon="@drawable/oc"
+        android:orderInCategory="100"
+        android:title="OCtrasnport"
+        android:visible="true"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/helpNutrition"
+        android:orderInCategory="100"
+        android:title="Help"
+        android:visible="true"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/exitNutrition"
+        android:orderInCategory="100"
+        android:title="Exit"
+        android:visible="true"
+        app:showAsAction="never"/>
+
+</menu>

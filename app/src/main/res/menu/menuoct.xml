@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/switchToNutrition"
+        android:icon="@drawable/nu"
+        android:orderInCategory="100"
+        android:title="Nutrition"
+        android:visible="true"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/switchTocbc"
+        android:icon="@drawable/c"
+        android:orderInCategory="100"
+        android:title="CBCnews"
+        android:visible="true"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/switchTomovie"
+        android:icon="@drawable/movie"
+        android:orderInCategory="100"
+        android:title="Movie"
+        android:visible="true"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/switchToHome"
+        android:icon="@drawable/homeicon"
+        android:orderInCategory="100"
+        android:title="Home"
+        android:visible="true"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/help"
+        android:orderInCategory="100"
+        android:title="Help"
+        android:visible="true"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/exit"
+        android:orderInCategory="100"
+        android:title="Exit"
+        android:visible="true"
+        app:showAsAction="never"/>
+
+</menu>

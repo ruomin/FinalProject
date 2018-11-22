@@ -134,6 +134,8 @@ public class Nutrition extends AppCompatActivity {
 
 
 
+
+
         @Override
         protected void onResume () {
             super.onResume();
@@ -159,5 +161,6 @@ public class Nutrition extends AppCompatActivity {
             super.onDestroy();
             Log.i(ACTIVITY_NAME, "In onDestroy()");
         }
+
     }
 

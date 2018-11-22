@@ -24,7 +24,14 @@
     <!--CBCNEWS-->
     <string name="cbc_search">Search</string>
     <string name="cbc_editText">Type the title of the article</string>
-
+    <string name="cbc_button_quit">Do you want to Quit the application?</string>
+    <string name="cbc_button_save">Do you want to Save the article?</string>
+    <string name="cbc_menu_itme">CBC</string>
+    <string name="cbc_helper_message">Author: Xin Zhao \n Version: 2.0  \n The detail of the application: \n
+    You can get the article title and select or save the article in this applicatin</string>
+    <string name="cbc_button_frame">Change to Frame Layout</string>
+    <string name="cbc_frame_change_button">Change FrameLayout</string>
+    <string name="cbc_asy_button">AsyncTask</string>
     <!--Nutrition-->
     <string name="NutritionButton">Nutrition</string>
     <string name="Hint">Search Database</string>

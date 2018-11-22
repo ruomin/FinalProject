@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 public class MainActivity extends Activity {
 
@@ -17,6 +18,7 @@ public class MainActivity extends Activity {
     ImageView cbc;
     ImageView movie;
     ImageView octranspo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,7 @@ public class MainActivity extends Activity {
                 Log.i(ACTIVITY_NAME, "In onClick()");
             }
         });
+
 
 
 

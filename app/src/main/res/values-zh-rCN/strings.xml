@@ -9,4 +9,16 @@
     <string name="ok">好</string>
     <string name="cancel">取消</string>
     <string name="home_message">请重新选择想要去的程序</string>
+
+    <!--CBCNEWS-->
+    <string name="cbc_search">搜索</string>
+    <string name="cbc_editText">请输入文章的题目</string>
+    <string name="cbc_button_quit">退出应用</string>
+    <string name="cbc_button_save">保存文章</string>
+    <string name="cbc_menu_itme">CBC</string>
+    <string name="cbc_helper_message">作者：赵鑫 \n Version: 2.0  \n 应用细节: \n
+    你可以从这个应用中获取CBC新闻的列表，存储或者查看文章</string>
+    <string name="cbc_button_frame"> 前往Frame Layout</string>
+    <string name="cbc_frame_change_button">变化布局</string>
+    <string name="cbc_asy_button">AsyncTask</string>
 </resources>

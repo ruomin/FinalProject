@@ -13,9 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class CBCNewsActivity extends Activity {
+public class CBC extends Activity {
 
-    protected static final String ACTIVITY_NAME = "CBCNewsActivity";
+    protected static final String ACTIVITY_NAME = "CBC";
     private Button searchButton, saveButton,quitButton;
     private ImageView imageView;
     private EditText editText;
@@ -88,9 +88,6 @@ public class CBCNewsActivity extends Activity {
         Log.i(ACTIVITY_NAME, "In onDestroy()");
     }
 
-    /**
-     *
-     */
     private void showDialog() {
         Dialog dialog=new AlertDialog.Builder(this)
                 .setTitle("Exit the application?")//set the title

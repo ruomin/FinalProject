@@ -13,24 +13,17 @@
 
     <!--movie-->
     <string name="searchButton">search</string>
-    <string name="TestAsyncTask">Test AsyncTask</string>
+    <string name="homeButton">To Home Page</string>
     <string name="dialog_message">Do You Want To Go Home Page?</string>
     <string name="dialog_title">Warning</string>
-    <string name="dialog_help_message"> Author: Ruomin Zhang \n Version: 2.0 \n About the Application: You can use it to search movies and see the detail of the movie</string>
-    <string name="dialog_help_title">Help</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="home_message">Well Come Back To Home</string>
-    <string name="search_movie_title">Search Movie title</string>
-    <string name="movie_warning_snackbar">You are already in Movie World!</string>
 
 
     <!--CBCNEWS-->
     <string name="cbc_search">Search</string>
     <string name="cbc_editText">Type the title of the article</string>
-    <string name="cbc_button_save">Save</string>
-    <string name="cbc_button_quit">Quit</string>
-    <string name="cbc_button_search">Search</string>
 
     <!--Nutrition-->
     <string name="NutritionButton">Nutrition</string>

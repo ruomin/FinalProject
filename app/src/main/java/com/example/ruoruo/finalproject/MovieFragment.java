@@ -6,16 +6,20 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * For Fragment page
  */
 public class MovieFragment extends Fragment {
 
+    ImageView moviePic;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -23,6 +27,16 @@ public class MovieFragment extends Fragment {
         //return super.onCreateView(inflater, container, savedInstanceState);
 
         View view = inflater.inflate(R.layout.activity_movie_fragment, container, false);
+
+        moviePic = view.findViewById(R.id.AuthorRecommended);
+        moviePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+                getActivity().finish();
+            }
+        });
+
         return view;
 
     }

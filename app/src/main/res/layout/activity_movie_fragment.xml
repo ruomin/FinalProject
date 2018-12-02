@@ -9,9 +9,10 @@
 
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/AuthorRecommended"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/moiveicon" />
+        android:src="@drawable/pikachu" />
+
 
 </FrameLayout>

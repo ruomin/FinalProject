@@ -12,48 +12,67 @@
         android:id="@+id/imageMoveDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/movie" />
+        />
 
     <TextView
         android:id="@+id/MovieDetailTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Title" />
+        android:text="Title"
+        android:textSize="30dp" />
 
     <TextView
         android:id="@+id/MovieDetailYear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Year" />
+        android:text="Year"
+        android:textSize="30dp"/>
 
     <TextView
         android:id="@+id/MovieDetailRating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Rating" />
+        android:text="Rating"
+        android:textSize="30dp"/>
 
     <TextView
         android:id="@+id/MovieDetailRuntime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Runtime" />
+        android:text="Runtime"
+        android:textSize="30dp"/>
 
     <TextView
         android:id="@+id/MovieDetailMainActors"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="main actors" />
+        android:text="main actors"
+        android:textSize="30dp"/>
 
     <TextView
         android:id="@+id/MovieDetailPlot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="plot" />
+        android:text="plot"
+        />
 
     <TextView
         android:id="@+id/MovieDetailURL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="URL" />
+        android:text="URL"
+        />
+
+    <Button
+        android:id="@+id/saveMovieButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SaveButton" />
+
+    <ProgressBar
+        android:id="@+id/movieProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

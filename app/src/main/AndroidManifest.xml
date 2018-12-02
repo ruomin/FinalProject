@@ -27,7 +27,6 @@
         <activity android:name=".CBCDetail" />
         <activity android:name=".MovieActivity" />
         <activity android:name=".MovieDetail" />
-        <activity android:name=".FragmentPage" />
         <activity android:name=".Toolbar"></activity>
     </application>
 

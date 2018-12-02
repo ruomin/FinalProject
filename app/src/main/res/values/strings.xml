@@ -19,7 +19,7 @@
     <string name="ok">OK</string>
     <string name="no">Cancel</string>
     <string name="home_message">Well Come Back To Home</string>
-    <string name="TestAsyncTask">Test AsyncTask</string>
+    <string name="RecommendedMovie">Author Recommended</string>
     <string name="dialog_help_message"> Author: Ruomin Zhang \n Version: 2.0 \n About the Application: You can use it to search movies and see the detail of the movie</string>
     <string name="dialog_help_title">Help</string>
     <string name="search_movie_title">Search Movie title</string>
@@ -32,7 +32,7 @@
     <string name="cbc_button_quit">Do you want to Quit the application?</string>
     <string name="cbc_button_save">Do you want to Save the article?</string>
     <string name="cbc_menu_itme">CBC</string>
-    <string name="cbc_helper_message">Author: Xin Zhao \n Version: 2.0  \n The detail of the application: \n
+    <string name="cbc_helper_message">Author: Xin Zhao \n Version: 2.0  The detail of the application:
     You can get the article title and select or save the article in this applicatin</string>
     <string name="cbc_button_frame">Change to Frame Layout</string>
     <string name="cbc_frame_change_button">Change FrameLayout</string>

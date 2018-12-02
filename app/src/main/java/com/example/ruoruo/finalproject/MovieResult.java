@@ -11,6 +11,11 @@ public final class MovieResult {
         this.msg = msg;
     }
 
+//    public MovieResult(long id, String title, String year, ) {
+//        this.id = id;
+//        this.msg = msg;
+//    }
+
     public long getId() {
         return id;
     }

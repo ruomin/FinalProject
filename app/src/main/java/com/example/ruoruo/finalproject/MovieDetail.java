@@ -1,7 +1,11 @@
 package com.example.ruoruo.finalproject;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -9,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Xml;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,17 +33,24 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static com.example.ruoruo.finalproject.MovieDatabaseHelper.TABLE_NAME;
+
 
 public class MovieDetail extends Activity {
 
+    MovieActivity m = new MovieActivity();
     protected static final String ACTIVITY_NAME = "MovieDetail";
-
-    protected static final String urlString = "http://www.omdbapi.com/?i=tt3896198&apikey=88fe3b26";
+    //protected static final String urlString = "http://www.omdbapi.com/?t=it&r=xml&apikey=8bd2117a";
+    protected String urlString = "http://www.omdbapi.com/?t="+m.movieInput+"&r=xml&apikey=88fe3b26";
+    //protected static final String urlString = "http://www.omdbapi.com/?i=tt3896198&apikey=88fe3b26";
+    //protected static final String urlString = "http://www.omdbapi.com/?apikey=6c9862c2&r=xml&t=mum";
 
     //MovieActivity myMovie;
 
-    ProgressBar progressBar;
-
+    ProgressBar movieProgressBar;
+    /**
+     * declare all item
+     */
     TextView movieDetailTitle;
     TextView movieDetailYear;
     TextView movieDetailRating;
@@ -47,23 +59,71 @@ public class MovieDetail extends Activity {
     TextView movieDetailPlot;
     TextView movieDetailURL;
     ImageView imageMovie;
+    Button saveMovie;
+    /**
+     * declare all information for download
+     */
+    String movieTitle;
+    String movieYear;
+    String movieRating;
+    String movieRuntime;
+    String movieMainActors;
+    String moviePlot;
+    String movieURL;
+    String iconName;
+    Bitmap moviePoster;
+
+    private SQLiteDatabase db;
+    private Cursor cursor;
+    private MovieDatabaseHelper movieDatabaseHelper;
+
+//    public static String movieTit;
+//    public static String movieDes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
-
-         movieDetailTitle = findViewById(R.id.MovieDetailTitle);
-         movieDetailYear = findViewById(R.id.MovieDetailYear);
-         movieDetailRating = findViewById(R.id.MovieDetailRating);
-         movieDetailRuntime = findViewById(R.id.MovieDetailRuntime);
-         movieDetailMainActors = findViewById(R.id.MovieDetailMainActors);
-         movieDetailPlot = findViewById(R.id.MovieDetailPlot);
-         movieDetailURL = findViewById(R.id.MovieDetailURL);
-         imageMovie = findViewById(R.id.imageMoveDetail);
-
+        /**
+         * for find all item on the layout
+         */
+        movieDetailTitle = findViewById(R.id.MovieDetailTitle);
+        movieDetailYear = findViewById(R.id.MovieDetailYear);
+        movieDetailRating = findViewById(R.id.MovieDetailRating);
+        movieDetailRuntime = findViewById(R.id.MovieDetailRuntime);
+        movieDetailMainActors = findViewById(R.id.MovieDetailMainActors);
+        movieDetailPlot = findViewById(R.id.MovieDetailPlot);
+        movieDetailURL = findViewById(R.id.MovieDetailURL);
+        imageMovie = findViewById(R.id.imageMoveDetail);
+        saveMovie = findViewById(R.id.saveMovieButton);
+        movieProgressBar = findViewById(R.id.movieProgressBar);
+        /**
+         * run movie query
+         */
         MovieQuery movieQuery = new MovieQuery();
         movieQuery.execute(urlString);
+
+        movieDatabaseHelper = new MovieDatabaseHelper(this);
+        db = movieDatabaseHelper.getWritableDatabase();
+
+
+        saveMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ContentValues values = new ContentValues();
+                values.put(MovieDatabaseHelper.KEY_MOVIE_TITLE, movieTitle);
+                values.put(MovieDatabaseHelper.KEY_MOVIE_YEAR, movieYear);
+                values.put(MovieDatabaseHelper.KEY_MOVIE_RATING, movieRating);
+                values.put(MovieDatabaseHelper.KEY_MOVIE_RUNTIME, movieRuntime);
+                values.put(MovieDatabaseHelper.KEY_MOVIE_MAIN_ACTORS, movieMainActors);
+                values.put(MovieDatabaseHelper.KEY_MOVIE_PLOT, moviePlot);
+                values.put(MovieDatabaseHelper.KEY_MOVIE_URL, movieURL);
+                db.insert(TABLE_NAME, "null", values);
+
+                Intent intent = new Intent(MovieDetail.this,MovieActivity.class);
+                startActivity(intent);
+        }
+        });
 
     }
 
@@ -117,27 +177,21 @@ public class MovieDetail extends Activity {
         }
     }
 
+    /**
+     * load information form internet
+     */
     public class MovieQuery extends AsyncTask<String, Integer, String> {
 
-        int movieTitle;
-        String movieYear;
-        String movieRating;
-        String movieRuntime;
-        String movieMainActors;
-        String moviePlot;
-        String movieURL;
-        String iconName;
-        Bitmap icon;
+
 
         int hasRead = 0;
 
         StringBuilder stringBuilder = new StringBuilder();
         @Override
         protected String doInBackground(String... arg) {
-//            progressBar.setVisibility(ProgressBar.VISIBLE);
+            movieProgressBar.setVisibility(ProgressBar.VISIBLE);
 
             try{
-
                 URL url = new URL(urlString);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(10000 /* milliseconds */);
@@ -151,45 +205,36 @@ public class MovieDetail extends Activity {
 
                 XmlPullParser xpp = Xml.newPullParser();
                 xpp.setInput( stream , null);
-                movieTitle = xpp.getAttributeCount();
+//                xpp.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+//                movieTitle = xpp.getAttributeCount();
+//
+//                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()
+//                        , "utf-8"));
+//                String line = null;
+//                while((line = bufferedReader.readLine()) != null) {
+//                    stringBuilder.append(line + "\n");
+//                    hasRead++;
 
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()
-                        , "utf-8"));
-                String line = null;
-                while((line = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(line + "\n");
-                    hasRead++;
+                while (xpp.next() != XmlPullParser.END_DOCUMENT) {
+                    Log.i(ACTIVITY_NAME, "In while");
 
-//
-//
-//                while (xpp.next() != XmlPullParser.END_DOCUMENT) {
-//                    Log.i(ACTIVITY_NAME, "In while");
-//                    if (xpp.getEventType() != XmlPullParser.START_TAG) {
-//                        continue;
-//                    }
-//
-//                    if (xpp.getName().equals("Title")) {
-//                        movieTitle = xpp.getAttributeValue(null, "Title");
-//                        publishProgress(25);
-//                    }if (xpp.getName().equals("Year")) {
-//                        movieYear = xpp.getAttributeValue(null, "Year");
-//                        publishProgress(50);
-//                    }if (xpp.getName().equals("Rated")) {
-//                        movieRating = xpp.getAttributeValue(null, "Rated");
-//                        publishProgress(75);
-//                    }if (xpp.getName().equals("Runtime")) {
-//                        movieRuntime = xpp.getAttributeValue(null, "Runtime");
-//                    }if (xpp.getName().equals("Actors")) {
-//                        movieMainActors = xpp.getAttributeValue(null, "Actors");
-//                    }if (xpp.getName().equals("Plot")) {
-//                        moviePlot = xpp.getAttributeValue(null, "Plot");
-//                    }if (xpp.getName().equals("Website")) {
-//                        movieURL = xpp.getAttributeValue(null,"Website");
-//                    }
-//
-//                    if (xpp.getName().equals("Poster")) {
-//                        iconName = xpp.getAttributeValue(null, "Poster");
-//                        String iconFile = iconName + ".png";
+                    //if (xpp.getEventType() == XmlPullParser.START_TAG) {
+                        if(xpp.getName().equals("movie")) {
+                        movieTitle = xpp.getAttributeValue(null, "title");
+                        publishProgress(10);
+                        movieYear = xpp.getAttributeValue(null, "year");
+                        publishProgress(20);
+                        movieRating = xpp.getAttributeValue(null, "rated");
+                        publishProgress(30);
+                        movieRuntime = xpp.getAttributeValue(null, "runtime");
+                        publishProgress(40);
+                        movieMainActors = xpp.getAttributeValue(null, "actors");
+                        publishProgress(50);
+                        moviePlot = xpp.getAttributeValue(null, "plot");
+                        publishProgress(60);
+                        movieURL = xpp.getAttributeValue(null, "poster");
+                        publishProgress(70);
+                        String iconFile = iconName + ".png";
 //                        if (fileExistance(iconFile)) {
 //                            FileInputStream inputStream = null;
 //                            try {
@@ -197,22 +242,23 @@ public class MovieDetail extends Activity {
 //                            } catch (Exception e) {
 //                                e.printStackTrace();
 //                            }
-//                            icon = BitmapFactory.decodeStream(inputStream);
+//                            moviePoster = BitmapFactory.decodeStream(inputStream);
 //                            Log.i(ACTIVITY_NAME, "Image already exists");
 //                        } else {
-//                            //Bitmap image  = HTTPUtils.getImage(ImageURL));
-//
-//                            URL iconUrl = new URL("http://openweathermap.org/img/w/" + iconName + ".png");
-//                            icon = getImage(iconUrl);
-//                            FileOutputStream outputStream = openFileOutput(iconName + ".png", Context.MODE_PRIVATE);
-//                            icon.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
-//                            outputStream.flush();
-//                            outputStream.close();
-//                            Log.i(ACTIVITY_NAME, "Add a new image");
-//                        }
-//                    }
-                }
+                            //Bitmap image  = HTTPUtils.getImage(ImageURL);
 
+                            URL iconUrl = new URL(movieURL + iconName + ".png");
+                            moviePoster = getImage(iconUrl);
+                            FileOutputStream outputStream = openFileOutput(iconName + ".png", Context.MODE_PRIVATE);
+                            moviePoster.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
+                            outputStream.flush();
+                            outputStream.close();
+                            Log.i(ACTIVITY_NAME, "Add a new image");
+
+                        //}
+                            break;
+                    }
+                }
             }catch(MalformedURLException urlEX){
                 urlEX.printStackTrace();
             } catch (IOException e) {
@@ -221,7 +267,7 @@ public class MovieDetail extends Activity {
                 e.printStackTrace();
             }
 
-//            publishProgress(100);
+            publishProgress(100);
             Log.i(ACTIVITY_NAME, "In doInBackground");
             return null;
 //
@@ -232,8 +278,8 @@ public class MovieDetail extends Activity {
         @Override
         protected void onProgressUpdate(Integer... values) {
 
-            progressBar.setVisibility(View.VISIBLE);
-            progressBar.setProgress(values[0]);
+            movieProgressBar.setVisibility(View.VISIBLE);
+            movieProgressBar.setProgress(values[0]);
             Log.i(ACTIVITY_NAME, "In onProgressUpdate");
 
         }
@@ -241,20 +287,22 @@ public class MovieDetail extends Activity {
         @Override
         protected void onPostExecute(String string) {
 
-            movieDetailTitle.setText(stringBuilder);
+            //movieDetailTitle.setText(stringBuilder);
             //progressDialog.dismiss();
 
-//            movieDetailTitle.setText("Movie Title"+movieDetailTitle.getText()+movieTitle);
-//            movieDetailYear.setText("Movie Year"+movieDetailYear.getText()+movieYear);
-//            movieDetailRating.setText("Movie Rating"+movieDetailRating.getText()+movieRating);
-//            movieDetailRuntime.setText("Movie Runtime"+movieDetailRuntime.getText()+movieRuntime);
-//            movieDetailMainActors.setText("Movie Main Actors"+movieDetailMainActors.getText()+movieMainActors);
-//            movieDetailPlot.setText("Movie Plot"+movieDetailPlot.getText()+moviePlot);
-//            movieDetailURL.setText("Movie URL"+movieDetailURL.getText()+movieURL);
-//            movieDetailTitle.setText("Movie Title"+movieDetailTitle.getText()+movieTitle);
-//
-//            imageMovie.setImageBitmap(icon);
-            //progressBar.setVisibility(View.INVISIBLE);
+            movieDetailTitle.setText(movieDetailTitle.getText()+": "+movieTitle);
+            movieDetailYear.setText(movieDetailYear.getText()+": "+movieYear);
+            movieDetailRating.setText(movieDetailRating.getText()+": "+movieRating);
+            movieDetailRuntime.setText(movieDetailRuntime.getText()+": "+movieRuntime);
+            movieDetailMainActors.setText(movieDetailMainActors.getText()+": "+movieMainActors);
+            movieDetailPlot.setText(movieDetailPlot.getText()+": "+moviePlot);
+            movieDetailURL.setText(movieDetailURL.getText()+": "+movieURL);
+
+//            movieTit = movieDetailTitle.getText()+": "+movieTitle;
+//            movieDes = movieDetailPlot.getText()+": "+moviePlot;
+
+            imageMovie.setImageBitmap(moviePoster);
+            movieProgressBar.setVisibility(View.INVISIBLE);
 
         }
     }

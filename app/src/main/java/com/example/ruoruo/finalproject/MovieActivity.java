@@ -7,12 +7,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,11 +24,21 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import static com.example.ruoruo.finalproject.MovieDatabaseHelper.TABLE_NAME;
@@ -42,7 +55,7 @@ public class MovieActivity extends AppCompatActivity {
      */
     private Button btnSearchMovie;
 
-    private Button btn_testAsyncTask;
+    private Button btn_fragment;
 
     /**
      * toorbar for movie application
@@ -53,7 +66,7 @@ public class MovieActivity extends AppCompatActivity {
      * when click search button, the result should be shown on the listView
      */
     private ListView listViewMovie;
-
+    private ArrayList<String> movieTitleList = new ArrayList<>();
     /**
      * boolean frame Layout is exist or not
      */
@@ -65,12 +78,20 @@ public class MovieActivity extends AppCompatActivity {
 
     private String inputMovieSearch;
 
+    public static String movieInput;
+
+
+
     /**
      * for database part
      */
     private MovieDatabaseHelper movieDatabaseHelper;
     private SQLiteDatabase db;
-    private ArrayList<MovieResult> arrayList;
+    //private ArrayList<MovieResult> arrayList;
+    MovieAdapter movieAdapter;
+
+    ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,15 +101,15 @@ public class MovieActivity extends AppCompatActivity {
         /**
          * display wellcome message Toast on the screen when enter the application
          */
-        Toast.makeText(MovieActivity.this, "Well come to movie world!",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MovieActivity.this, "Well come to movie world!",Toast.LENGTH_SHORT).show();
 
         /**
          * boolean check if the FrameLayout exists on the screen
          */
         ifFrameLayoutExist = findViewById(R.id.frame) != null;
 
-        final ArrayList<MovieResult> arrayList = new ArrayList<MovieResult>();
-        MovieAdapter movieAdapter = new MovieAdapter(arrayList,this);
+        //arrayList = new ArrayList<MovieResult>();
+        //MovieAdapter movieAdapter = new MovieAdapter(movieTitleList,this);
 
         /**
          * add MovieToolbar to the page
@@ -99,17 +120,45 @@ public class MovieActivity extends AppCompatActivity {
          * find search movie button and set on click listener
          */
         btnSearchMovie = findViewById(R.id.buttonSearchMovie);
+        btn_fragment = findViewById(R.id.recommendedMovie);
+        movieDatabaseHelper = new MovieDatabaseHelper(this);
+        db = movieDatabaseHelper.getWritableDatabase();
+
+//        getAllMessageFromDb();
+        cursor = db.query(true,movieDatabaseHelper.TABLE_NAME, null, null, null, null, null, null,null);
+
+        Log.i(ACTIVITY_NAME, "Cursor's Column Count " + cursor.getColumnCount());
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Log.i(ACTIVITY_NAME, "SQL MESSAGE:" + cursor.getString(cursor.getColumnIndex(movieDatabaseHelper.KEY_MOVIE_TITLE)));
+            movieTitleList.add(cursor.getString(cursor.getColumnIndex(movieDatabaseHelper.KEY_MOVIE_TITLE)));
+            cursor.moveToNext();
+        }
+        listViewMovie = findViewById(R.id.listViewMovie);
+        movieAdapter = new MovieAdapter(movieTitleList,this);
+        listViewMovie.setAdapter (movieAdapter);
+//        arrayList.add(messageResult);
+//        movieAdapter.notifyDataSetChanged();
 
         /**
-         * Test Fragment
+         *
+         * for search movie and show it in movie detail page
          */
         btnSearchMovie.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                    MovieFragment myFragment = new MovieFragment();
-                    getFragmentManager().beginTransaction().replace(R.id.testFragment, myFragment).commit();
+                editTextSearchMovieTitle = findViewById(R.id.searchMovieTittle);
+                movieInput = editTextSearchMovieTitle.getText().toString();
+                if (movieInput.isEmpty()) {//if user input is empty, display a message Toast on the screen when enter the application
+                    {Toast.makeText(MovieActivity.this,"Please input a movie title", Toast.LENGTH_LONG).show();}
+                } else {
+                    Intent intent = new Intent(MovieActivity.this, MovieDetail.class);
+                    startActivity(intent);
+                }
+            }
 
-//                inputMovieSearch = editTextSearchMovieTitle.getText().toString();
+                    //inputMovieSearch = editTextSearchMovieTitle.getText().toString();
 //
 //                MovieResult messageResult = new MovieResult(-1, inputMovieSearch);
 //                arrayList.add(messageResult);
@@ -120,50 +169,51 @@ public class MovieActivity extends AppCompatActivity {
 //                db.insert(TABLE_NAME, "null", values);
 //
 //                editTextSearchMovieTitle.setText("");
-            }
+
         });
         /**
          * find listview of movie page, when click item it should show details of the movie
          */
-        listViewMovie = findViewById(R.id.listViewMovie);
-//        listViewMovie.setOnItemClickListener((adapterView, view, position, id) -> {
-//            String msg = movieAdapter.getItem(position);
-//            long ID = movieAdapter.getItemId(position);
-//
-//            MovieFragment myFragment = new MovieFragment();
-//
-//            if (ifFrameLayoutExist) {
-//                getFragmentManager().beginTransaction().replace(R.id.frame, myFragment).commit();
-//            } else {
-//                Intent next = new Intent(MovieActivity.this, MovieFragment.class);
-//                next.putExtra("Message", msg);
-//                next.putExtra("ID", ID);
-//
-//                startActivityForResult(next, 10);
-//            }
-//
-//        });
+        listViewMovie.setOnItemClickListener((adapterView, view, position, id) -> {
+            String msg = movieAdapter.getItem(position);
+            long ID = movieAdapter.getItemId(position);
+
+            MovieFragment myFragment = new MovieFragment();
+
+            if (ifFrameLayoutExist) {
+                getFragmentManager().beginTransaction().replace(R.id.frame, myFragment).commit();
+            } else {
+                Intent next = new Intent(MovieActivity.this, MovieFragment.class);
+                next.putExtra("Message", msg);
+                next.putExtra("ID", ID);
+
+                startActivityForResult(next, 10);
+            }
+
+        });
+        //if（movieDatabaseHelper.）
         Log.i(ACTIVITY_NAME, "In onCreate()");
         /**
-         * test AsyncTask
+         * fragment to show Recommended Movie
          */
-        btn_testAsyncTask = findViewById(R.id.testAsyncTaskButton);
-        btn_testAsyncTask.setOnClickListener(new View.OnClickListener() {
+
+        btn_fragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MovieActivity.this,MovieDetail.class);
-                startActivity(intent);
+
+                MovieFragment myFragment = new MovieFragment();
+                getFragmentManager().beginTransaction().replace(R.id.testFragment, myFragment).commit();
+
             }
         });
-        
+//        getFragmentManager().beginTransaction().remove(myFragment).commit();
         
     }
 
-
     /**
-     * add option menu
-     * @param menu
-     * @return
+     * add option menu on the layout
+     * @param menu layout
+     * @return true
      */
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.movie_menu,menu);
@@ -172,7 +222,7 @@ public class MovieActivity extends AppCompatActivity {
 
     /**
      * use switch case to set MovieToolbar action
-     * @param item
+     * @param item on toorbar
      * @return item
      */
     public boolean onOptionsItemSelected(MenuItem item){
@@ -288,49 +338,48 @@ public class MovieActivity extends AppCompatActivity {
     /**
      * Database
      */
-    private void getAllMessageFromDb() {
-        cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
-        cursor.moveToFirst();
-
-        Log.i(ACTIVITY_NAME, "Cursor's Column Count " + cursor.getColumnCount());
-
-        if (cursor != null) {
-            while (cursor.moveToNext()) {
-                final String chat = cursor.getString(cursor.getColumnIndex(MovieDatabaseHelper.KEY_MESSAGE));
-                final long id = cursor.getLong(cursor.getColumnIndex(MovieDatabaseHelper.KEY_ID));
-                MovieResult result = new MovieResult(id, chat);
-                Log.i(ACTIVITY_NAME, "SQL MESSAGE:" + chat);
-                arrayList.add(result);
-            }
-        }
-
-        for (int x = 0; x < cursor.getColumnCount(); x++) {
-            Log.i(ACTIVITY_NAME, "Cursor’s  column name = " + cursor.getColumnName(x));
-        }
-    }
+//    private void getAllMessageFromDb() {
+//        cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
+//        cursor.moveToFirst();
+//
+//        Log.i(ACTIVITY_NAME, "Cursor's Column Count " + cursor.getColumnCount());
+//
+//        if (cursor != null) {
+//            while (cursor.moveToNext()) {
+//                final String chat = cursor.getString(cursor.getColumnIndex(MovieDatabaseHelper.KEY_MOVIE_TITLE));
+//                final long id = cursor.getLong(cursor.getColumnIndex(MovieDatabaseHelper.KEY_MOVIE_ID));
+//                MovieResult result = new MovieResult(id, chat);
+//                Log.i(ACTIVITY_NAME, "SQL MESSAGE:" + chat);
+//                arrayList.add(result);
+//            }
+//        }
+//
+//        for (int x = 0; x < cursor.getColumnCount(); x++) {
+//            Log.i(ACTIVITY_NAME, "Cursor’s  column name = " + cursor.getColumnName(x));
+//        }
+//    }
 
     /**
      * for build arrayList of the list view
      */
     private class MovieAdapter extends BaseAdapter {
 
-        private ArrayList<MovieResult> list;
+        //private ArrayList<MovieResult> list;
+
         private Context ctx;
 
-        public MovieAdapter(ArrayList<MovieResult> list, Context ctx) {
-            this.list = list;
+        public MovieAdapter(ArrayList<String> list, Context ctx) {
             this.ctx = ctx;
-
         }
 
         @Override
         public int getCount() {
-            return list.size();
+            return movieTitleList.size();
         }
 
         @Override
-        public MovieResult getItem(int position) {
-            return list.get(position);
+        public String getItem(int position) {
+            return movieTitleList.get(position);
         }
 
         @Override
@@ -344,21 +393,16 @@ public class MovieActivity extends AppCompatActivity {
             LayoutInflater inflater = MovieActivity.this.getLayoutInflater();
             View result;
 
-            if (position % 2 == 0) {
+                result = inflater.inflate(R.layout.movie_list_row, null);
 
-                result = inflater.inflate(R.layout.activity_movie_detail, null);
+            TextView message = result.findViewById(R.id.movieListRowTitle);
 
-            } else {
-
-                result = inflater.inflate(R.layout.activity_movie_detail, null);
-            }
-
-//            TextView message = result.findViewById(R.id.message_text);
-//
-//            message.setText(getItem(position).getMsg()); // get the string at position
-            return null;
+            message.setText(getItem(position)); // get the string at position
+            return result;
 
         }
 
     }
+
+
 }

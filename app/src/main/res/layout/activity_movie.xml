@@ -13,66 +13,48 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent" />
 
-
-
-    <android.support.v4.widget.DrawerLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/activity_toolbar">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-
-    <EditText
-        android:id="@+id/searchEditText"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="@string/search_movie_title" />
-
-    <Button
-        android:id="@+id/buttonSearchMovie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/searchEditText"
-        android:text="@string/searchButton" />
-
-    <ListView
-        android:id="@+id/listViewMovie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/searchEditText"
-        />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/searchEditText"/>
-
-        <Button
-            android:id="@+id/testAsyncTaskButton"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/TestAsyncTask"
-            android:layout_below="@+id/progressBar"/>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_below="@+id/testAsyncTaskButton"
-            android:id="@+id/testFragment"
-            >
-
-        </FrameLayout>
-
-    </RelativeLayout>
+            android:layout_height="match_parent">
 
 
+            <EditText
+                android:id="@+id/searchMovieTittle"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/search_movie_title"
+                android:inputType="textPersonName" />
 
-    </android.support.v4.widget.DrawerLayout>
+            <Button
+                android:id="@+id/buttonSearchMovie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/searchMovieTittle"
+                android:text="@string/searchButton" />
+
+            <Button
+                android:id="@+id/recommendedMovie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/searchMovieTittle"
+                android:text="@string/RecommendedMovie" />
+
+            <ListView
+                android:id="@+id/listViewMovie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/recommendedMovie"
+                />
+
+            <FrameLayout
+                android:id="@+id/testFragment"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_below="@+id/recommendedMovie">
+
+            </FrameLayout>
+
+        </RelativeLayout>
+
+
 </LinearLayout>

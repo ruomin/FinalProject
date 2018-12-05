@@ -19,7 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CBC" />
         <activity android:name=".Nutrition" />
         <activity android:name=".OCTranspo" />
         <activity android:name=".Movie" />

@@ -24,6 +24,11 @@
     <string name="dialog_help_title">Help</string>
     <string name="search_movie_title">Search Movie title</string>
     <string name="movie_warning_snackbar">You are already in Movie World!</string>
+    <string name="backMovieButton">Go Back</string>
+    <string name="saveMovieButton">Save to My Favourite</string>
+    <string name="statisticsMovie">Statistics Movie</string>
+
+
 
 
     <!--CBCNEWS-->

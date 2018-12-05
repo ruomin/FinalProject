@@ -51,17 +51,17 @@ public class MovieActivity extends AppCompatActivity {
     protected static final String ACTIVITY_NAME = "MovieActivity";
 
     /**
-     *the button to start search movie form internet
+     * the button to start search movie form internet
      */
     private Button btnSearchMovie;
-
+    /**
+     * the button to load a fragment
+     */
     private Button btn_fragment;
-
     /**
      * toorbar for movie application
      */
     public Toolbar toolbar;
-
     /**
      * when click search button, the result should be shown on the listView
      */
@@ -71,64 +71,84 @@ public class MovieActivity extends AppCompatActivity {
      * boolean frame Layout is exist or not
      */
     boolean ifFrameLayoutExist;
-    
+    /**
+     * database cursor
+     */
     private Cursor cursor;
-
+    /**
+     * user input edit text and string type
+     */
     private EditText editTextSearchMovieTitle;
-
-    private String inputMovieSearch;
-
     public static String movieInput;
-
-
-
+    /**
+     * for Statistics Movie button and shown in a text view
+     */
+    private Button btn_StatisticsMovie;
+    private TextView statisticsMovieView;
+    /**
+     * a dialog builder
+     */
+    private AlertDialog.Builder builder;
     /**
      * for database part
      */
     private MovieDatabaseHelper movieDatabaseHelper;
     private SQLiteDatabase db;
-    //private ArrayList<MovieResult> arrayList;
-    MovieAdapter movieAdapter;
+    private MovieAdapter movieAdapter;
 
-    ProgressBar progressBar;
-
+    MovieFragment myFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
-
-        /**
-         * display wellcome message Toast on the screen when enter the application
-         */
-        //Toast.makeText(MovieActivity.this, "Well come to movie world!",Toast.LENGTH_SHORT).show();
+        Log.i(ACTIVITY_NAME, "In onCreate()");
 
         /**
          * boolean check if the FrameLayout exists on the screen
          */
         ifFrameLayoutExist = findViewById(R.id.frame) != null;
-
-        //arrayList = new ArrayList<MovieResult>();
-        //MovieAdapter movieAdapter = new MovieAdapter(movieTitleList,this);
-
         /**
          * add MovieToolbar to the page
          */
         toolbar = findViewById(R.id.movieToolbar);
         setSupportActionBar(toolbar);
         /**
-         * find search movie button and set on click listener
+         * find search movie button, fragment button, statistics button and statistics view
          */
         btnSearchMovie = findViewById(R.id.buttonSearchMovie);
         btn_fragment = findViewById(R.id.recommendedMovie);
+        btn_StatisticsMovie = findViewById(R.id.buttonStatisticsMovie);
+        statisticsMovieView = findViewById(R.id.statisticsMovie);
+        /**
+         * permit writable database
+         */
         movieDatabaseHelper = new MovieDatabaseHelper(this);
         db = movieDatabaseHelper.getWritableDatabase();
-
-//        getAllMessageFromDb();
-        cursor = db.query(true,movieDatabaseHelper.TABLE_NAME, null, null, null, null, null, null,null);
-
+        /**
+         *
+         * for search movie and show it in movie detail page
+         */
+        btnSearchMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editTextSearchMovieTitle = findViewById(R.id.searchMovieTittle);
+                movieInput = editTextSearchMovieTitle.getText().toString();
+                if (movieInput.isEmpty()) {//if user input is empty, display a message Toast on the screen when enter the application
+                    {
+                        Toast.makeText(MovieActivity.this, "Please input a movie title", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Intent intent = new Intent(MovieActivity.this, MovieDetail.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        /**
+         * all saved item in database show on listview
+         */
+        cursor = db.query(true, movieDatabaseHelper.TABLE_NAME, null, null, null, null, null, null, null);
         Log.i(ACTIVITY_NAME, "Cursor's Column Count " + cursor.getColumnCount());
-
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Log.i(ACTIVITY_NAME, "SQL MESSAGE:" + cursor.getString(cursor.getColumnIndex(movieDatabaseHelper.KEY_MOVIE_TITLE)));
@@ -136,101 +156,114 @@ public class MovieActivity extends AppCompatActivity {
             cursor.moveToNext();
         }
         listViewMovie = findViewById(R.id.listViewMovie);
-        movieAdapter = new MovieAdapter(movieTitleList,this);
-        listViewMovie.setAdapter (movieAdapter);
-//        arrayList.add(messageResult);
-//        movieAdapter.notifyDataSetChanged();
-
+        movieAdapter = new MovieAdapter(movieTitleList, this);
+        listViewMovie.setAdapter(movieAdapter);
         /**
-         *
-         * for search movie and show it in movie detail page
+         * fragment to show Recommended Movie
          */
-        btnSearchMovie.setOnClickListener(new View.OnClickListener(){
+        btn_fragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editTextSearchMovieTitle = findViewById(R.id.searchMovieTittle);
-                movieInput = editTextSearchMovieTitle.getText().toString();
-                if (movieInput.isEmpty()) {//if user input is empty, display a message Toast on the screen when enter the application
-                    {Toast.makeText(MovieActivity.this,"Please input a movie title", Toast.LENGTH_LONG).show();}
-                } else {
-                    Intent intent = new Intent(MovieActivity.this, MovieDetail.class);
-                    startActivity(intent);
-                }
+                myFragment = new MovieFragment();
+                getFragmentManager().beginTransaction().add(R.id.testFragment, myFragment).commit();
+                Log.i(ACTIVITY_NAME, "In Fragment");
             }
-
-                    //inputMovieSearch = editTextSearchMovieTitle.getText().toString();
-//
-//                MovieResult messageResult = new MovieResult(-1, inputMovieSearch);
-//                arrayList.add(messageResult);
-//                movieAdapter.notifyDataSetChanged();
-//
-//                ContentValues values = new ContentValues();
-//                values.put(MovieDatabaseHelper.KEY_MESSAGE, inputMovieSearch);
-//                db.insert(TABLE_NAME, "null", values);
-//
-//                editTextSearchMovieTitle.setText("");
-
         });
         /**
          * find listview of movie page, when click item it should show details of the movie
          */
         listViewMovie.setOnItemClickListener((adapterView, view, position, id) -> {
-            String msg = movieAdapter.getItem(position);
-            long ID = movieAdapter.getItemId(position);
+            String movieTitle = (listViewMovie.getItemAtPosition(position).toString());
 
-            MovieFragment myFragment = new MovieFragment();
+            builder = new AlertDialog.Builder(MovieActivity.this);
+            builder.setMessage("Do you want to delete it?");
+            builder.setTitle(R.string.dialog_help_title)
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 
-            if (ifFrameLayoutExist) {
-                getFragmentManager().beginTransaction().replace(R.id.frame, myFragment).commit();
-            } else {
-                Intent next = new Intent(MovieActivity.this, MovieFragment.class);
-                next.putExtra("Message", msg);
-                next.putExtra("ID", ID);
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User clicked OK button
+                            db.delete(TABLE_NAME, "title = ?", new String[]{movieTitle});
+                            movieTitleList.remove(position);
+                            movieAdapter.notifyDataSetChanged();
+                        }
+                    })
+                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 
-                startActivityForResult(next, 10);
-            }
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent intent = new Intent(MovieActivity.this, MovieInformation.class);
+                            intent.putExtra("movieInfo", movieTitle);
+                            startActivityForResult(intent, 10);
+                        }
 
+                    }).show();
         });
-        //if（movieDatabaseHelper.）
-        Log.i(ACTIVITY_NAME, "In onCreate()");
-        /**
-         * fragment to show Recommended Movie
-         */
 
-        btn_fragment.setOnClickListener(new View.OnClickListener() {
+        /**
+         * statistics on the shortest, longest, and average movie run time and year of the movies
+         */
+        btn_StatisticsMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String minYear = "SELECT MIN(" + movieDatabaseHelper.KEY_MOVIE_YEAR + ") FROM " + movieDatabaseHelper.TABLE_NAME;
+                db = movieDatabaseHelper.getReadableDatabase();
+                Cursor cursorMinYear = db.rawQuery(minYear, null);
+                cursorMinYear.moveToFirst();
+                int minyear = cursorMinYear.getInt(0);
 
-                MovieFragment myFragment = new MovieFragment();
-                getFragmentManager().beginTransaction().replace(R.id.testFragment, myFragment).commit();
+                String maxYear = "SELECT MAX(" + movieDatabaseHelper.KEY_MOVIE_YEAR + ") FROM " + movieDatabaseHelper.TABLE_NAME;
+                Cursor cursorMaxYear = db.rawQuery(maxYear, null);
+                cursorMaxYear.moveToFirst();
+                int maxyear = cursorMaxYear.getInt(0);
 
+                String avgYear = "SELECT AVG(" + movieDatabaseHelper.KEY_MOVIE_YEAR + ") FROM " + movieDatabaseHelper.TABLE_NAME;
+                Cursor cursorAvgYear = db.rawQuery(avgYear, null);
+                cursorAvgYear.moveToFirst();
+                int avgyear = cursorAvgYear.getInt(0);
+
+                String minRuntime = "SELECT MIN(" + movieDatabaseHelper.KEY_MOVIE_YEAR + ") FROM " + movieDatabaseHelper.TABLE_NAME;
+                db = movieDatabaseHelper.getReadableDatabase();
+                Cursor cursorMinRuntime = db.rawQuery(minRuntime, null);
+                cursorMinRuntime.moveToFirst();
+                int minruntime = cursorMinRuntime.getInt(0);
+
+                String maxRuntime = "SELECT MAX(" + movieDatabaseHelper.KEY_MOVIE_YEAR + ") FROM " + movieDatabaseHelper.TABLE_NAME;
+                Cursor cursorMaxRuntime = db.rawQuery(maxRuntime, null);
+                cursorMaxRuntime.moveToFirst();
+                int maxruntime = cursorMaxRuntime.getInt(0);
+
+                String avgRuntime = "SELECT AVG(" + movieDatabaseHelper.KEY_MOVIE_YEAR + ") FROM " + movieDatabaseHelper.TABLE_NAME;
+                Cursor cursorAvgRuntime = db.rawQuery(avgRuntime, null);
+                cursorAvgRuntime.moveToFirst();
+                int avgruntime = cursorAvgRuntime.getInt(0);
+
+                statisticsMovieView.setText("Min Year is " + minyear + " ;Max Year is " + maxyear + " ;AVG Year is " + avgyear +
+                        "\nMin Runtime is " + minruntime + " ;Max Runtime is " + maxruntime + " ;Max Runtime is " + avgruntime);
             }
         });
-//        getFragmentManager().beginTransaction().remove(myFragment).commit();
-        
     }
 
     /**
      * add option menu on the layout
+     *
      * @param menu layout
      * @return true
      */
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.movie_menu,menu);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.movie_menu, menu);
         return true;
     }
 
     /**
      * use switch case to set MovieToolbar action
+     *
      * @param item on toorbar
      * @return item
      */
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         Intent intent;
-        AlertDialog.Builder builder;
 
-        switch(id){
+        switch (id) {
             /**
              * when click nutrition icon, go to nutrition main page
              */
@@ -242,7 +275,7 @@ public class MovieActivity extends AppCompatActivity {
              * when click cbc icon, go to cbc main page
              */
             case R.id.cbcNewsItemInMovie:
-                intent= new Intent(this, CBCNewsActivity.class);
+                intent = new Intent(this, CBCNewsActivity.class);
                 startActivity(intent);
                 break;
             /**
@@ -254,7 +287,7 @@ public class MovieActivity extends AppCompatActivity {
                 /**
                  * when click the button, a snackbar for warning user already in movie page that comes out from the bottom of the screen
                  */
-                Snackbar.make(btnSearchMovie,R.string.movie_warning_snackbar,Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(btnSearchMovie, R.string.movie_warning_snackbar, Snackbar.LENGTH_SHORT).show();
                 break;
             /**
              * when click octransport icon, go to octransport main page
@@ -268,8 +301,8 @@ public class MovieActivity extends AppCompatActivity {
              */
             case R.id.helpMovie:
                 builder = new AlertDialog.Builder(MovieActivity.this);
-                    builder.setMessage(R.string.dialog_help_message);
-                    builder.setTitle(R.string.dialog_help_title)
+                builder.setMessage(R.string.dialog_help_message);
+                builder.setTitle(R.string.dialog_help_title)
                         .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 onStop();
@@ -282,23 +315,23 @@ public class MovieActivity extends AppCompatActivity {
              */
             case R.id.exitMovie:
                 builder = new AlertDialog.Builder(MovieActivity.this);
-                    builder.setMessage(R.string.dialog_message);
-                    builder.setTitle(R.string.dialog_title)
-                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    // User clicked OK button
-                                    Intent resultIntent = new Intent();
-                                    resultIntent.putExtra("Response", getString(R.string.home_message));
-                                    setResult(Activity.RESULT_OK, resultIntent);
-                                    finish();
-                                }
-                            })
-                            .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    onStop();
-                                    // User cancelled the dialog
-                                }
-                            }).show();
+                builder.setMessage(R.string.dialog_message);
+                builder.setTitle(R.string.dialog_title)
+                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // User clicked OK button
+                                Intent resultIntent = new Intent();
+                                resultIntent.putExtra("Response", getString(R.string.home_message));
+                                setResult(Activity.RESULT_OK, resultIntent);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                onStop();
+                                // User cancelled the dialog
+                            }
+                        }).show();
                 break;
 
             default:
@@ -314,50 +347,30 @@ public class MovieActivity extends AppCompatActivity {
         super.onResume();
         Log.i(ACTIVITY_NAME, "In onResume()");
     }
+
     @Override
     protected void onStart() {
         super.onStart();
         Log.i(ACTIVITY_NAME, "In onStart()");
     }
+
     @Override
     protected void onPause() {
         super.onPause();
         Log.i(ACTIVITY_NAME, "In onPause()");
     }
+
     @Override
     protected void onStop() {
         super.onStop();
         Log.i(ACTIVITY_NAME, "In onStop()");
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         Log.i(ACTIVITY_NAME, "In onDestroy()");
     }
-
-    /**
-     * Database
-     */
-//    private void getAllMessageFromDb() {
-//        cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
-//        cursor.moveToFirst();
-//
-//        Log.i(ACTIVITY_NAME, "Cursor's Column Count " + cursor.getColumnCount());
-//
-//        if (cursor != null) {
-//            while (cursor.moveToNext()) {
-//                final String chat = cursor.getString(cursor.getColumnIndex(MovieDatabaseHelper.KEY_MOVIE_TITLE));
-//                final long id = cursor.getLong(cursor.getColumnIndex(MovieDatabaseHelper.KEY_MOVIE_ID));
-//                MovieResult result = new MovieResult(id, chat);
-//                Log.i(ACTIVITY_NAME, "SQL MESSAGE:" + chat);
-//                arrayList.add(result);
-//            }
-//        }
-//
-//        for (int x = 0; x < cursor.getColumnCount(); x++) {
-//            Log.i(ACTIVITY_NAME, "Cursor’s  column name = " + cursor.getColumnName(x));
-//        }
-//    }
 
     /**
      * for build arrayList of the list view
@@ -393,7 +406,7 @@ public class MovieActivity extends AppCompatActivity {
             LayoutInflater inflater = MovieActivity.this.getLayoutInflater();
             View result;
 
-                result = inflater.inflate(R.layout.movie_list_row, null);
+            result = inflater.inflate(R.layout.movie_list_row, null);
 
             TextView message = result.findViewById(R.id.movieListRowTitle);
 

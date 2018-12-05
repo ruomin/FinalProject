@@ -6,7 +6,6 @@
     android:layout_height="50dp"
     tools:context=".Toolbar">
 
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/NutritionToolbar"
         android:layout_width="match_parent"
@@ -18,9 +17,5 @@
         tools:layout_editor_absoluteX="10dp"
         tools:layout_editor_absoluteY="20dp"
         />
-
-
-
-
 
 </LinearLayout>

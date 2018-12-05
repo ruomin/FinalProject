@@ -15,6 +15,9 @@
     <string name="dialog_help_title">帮助</string>
     <string name="search_movie_title">查找电影</string>
     <string name="movie_warning_snackbar">已经在电影频道啦！</string>
+    <string name="backMovieButton">回主页</string>
+    <string name="saveMovieButton">加入我的最爱</string>
+    <string name="statisticsMovie">电影统计</string>
 
     <!--CBCNEWS-->
     <string name="cbc_search">搜索</string>

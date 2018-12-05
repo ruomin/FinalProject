@@ -37,48 +37,49 @@ import static com.example.ruoruo.finalproject.MovieDatabaseHelper.TABLE_NAME;
 
 
 public class MovieDetail extends Activity {
-
+    /**
+     * instance MovieActivity to get user input
+     */
     MovieActivity m = new MovieActivity();
     protected static final String ACTIVITY_NAME = "MovieDetail";
-    //protected static final String urlString = "http://www.omdbapi.com/?t=it&r=xml&apikey=8bd2117a";
-    protected String urlString = "http://www.omdbapi.com/?t="+m.movieInput+"&r=xml&apikey=88fe3b26";
-    //protected static final String urlString = "http://www.omdbapi.com/?i=tt3896198&apikey=88fe3b26";
-    //protected static final String urlString = "http://www.omdbapi.com/?apikey=6c9862c2&r=xml&t=mum";
-
-    //MovieActivity myMovie;
-
-    ProgressBar movieProgressBar;
+    /**
+     * movie API URL
+     */
+    protected String urlString = "http://www.omdbapi.com/?t=" + m.movieInput + "&r=xml&apikey=88fe3b26";
+    /**
+     * declare movie ProgressBar
+     */
+    private ProgressBar movieProgressBar;
     /**
      * declare all item
      */
-    TextView movieDetailTitle;
-    TextView movieDetailYear;
-    TextView movieDetailRating;
-    TextView movieDetailRuntime;
-    TextView movieDetailMainActors;
-    TextView movieDetailPlot;
-    TextView movieDetailURL;
-    ImageView imageMovie;
-    Button saveMovie;
+    private TextView movieDetailTitle;
+    private TextView movieDetailYear;
+    private TextView movieDetailRating;
+    private TextView movieDetailRuntime;
+    private TextView movieDetailMainActors;
+    private TextView movieDetailPlot;
+    private TextView movieDetailURL;
+    private ImageView imageMovie;
+    private Button saveMovie;
     /**
      * declare all information for download
      */
-    String movieTitle;
-    String movieYear;
-    String movieRating;
-    String movieRuntime;
-    String movieMainActors;
-    String moviePlot;
-    String movieURL;
-    String iconName;
-    Bitmap moviePoster;
-
+    private String movieTitle;
+    private String movieYear;
+    private String movieRating;
+    private String movieRuntime;
+    private String movieMainActors;
+    private String moviePlot;
+    private String movieURL;
+    //private String iconName;
+    private Bitmap moviePoster;
+    /**
+     * declare database
+     */
     private SQLiteDatabase db;
     private Cursor cursor;
     private MovieDatabaseHelper movieDatabaseHelper;
-
-//    public static String movieTit;
-//    public static String movieDes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +107,9 @@ public class MovieDetail extends Activity {
         movieDatabaseHelper = new MovieDatabaseHelper(this);
         db = movieDatabaseHelper.getWritableDatabase();
 
-
+        /**
+         * write into database when click save button Meanwhile go back to movie main page
+         */
         saveMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,9 +123,9 @@ public class MovieDetail extends Activity {
                 values.put(MovieDatabaseHelper.KEY_MOVIE_URL, movieURL);
                 db.insert(TABLE_NAME, "null", values);
 
-                Intent intent = new Intent(MovieDetail.this,MovieActivity.class);
+                Intent intent = new Intent(MovieDetail.this, MovieActivity.class);
                 startActivity(intent);
-        }
+            }
         });
 
     }
@@ -132,28 +135,32 @@ public class MovieDetail extends Activity {
         super.onResume();
         Log.i(ACTIVITY_NAME, "In onResume()");
     }
+
     @Override
     protected void onStart() {
         super.onStart();
         Log.i(ACTIVITY_NAME, "In onStart()");
     }
+
     @Override
     protected void onPause() {
         super.onPause();
         Log.i(ACTIVITY_NAME, "In onPause()");
     }
+
     @Override
     protected void onStop() {
         super.onStop();
         Log.i(ACTIVITY_NAME, "In onStop()");
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         Log.i(ACTIVITY_NAME, "In onDestroy()");
     }
 
-    public boolean fileExistance(String fname){
+    public boolean fileExistance(String fname) {
         File file = getBaseContext().getFileStreamPath(fname);
         return file.exists();
     }
@@ -182,16 +189,11 @@ public class MovieDetail extends Activity {
      */
     public class MovieQuery extends AsyncTask<String, Integer, String> {
 
-
-
-        int hasRead = 0;
-
-        StringBuilder stringBuilder = new StringBuilder();
         @Override
         protected String doInBackground(String... arg) {
             movieProgressBar.setVisibility(ProgressBar.VISIBLE);
 
-            try{
+            try {
                 URL url = new URL(urlString);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(10000 /* milliseconds */);
@@ -204,22 +206,14 @@ public class MovieDetail extends Activity {
                 InputStream stream = conn.getInputStream();
 
                 XmlPullParser xpp = Xml.newPullParser();
-                xpp.setInput( stream , null);
-//                xpp.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-//                movieTitle = xpp.getAttributeCount();
-//
-//                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()
-//                        , "utf-8"));
-//                String line = null;
-//                while((line = bufferedReader.readLine()) != null) {
-//                    stringBuilder.append(line + "\n");
-//                    hasRead++;
-
+                xpp.setInput(stream, null);
+                /**
+                 * loop to find movie information
+                 */
                 while (xpp.next() != XmlPullParser.END_DOCUMENT) {
                     Log.i(ACTIVITY_NAME, "In while");
 
-                    //if (xpp.getEventType() == XmlPullParser.START_TAG) {
-                        if(xpp.getName().equals("movie")) {
+                    if (xpp.getName().equals("movie")) {
                         movieTitle = xpp.getAttributeValue(null, "title");
                         publishProgress(10);
                         movieYear = xpp.getAttributeValue(null, "year");
@@ -234,7 +228,7 @@ public class MovieDetail extends Activity {
                         publishProgress(60);
                         movieURL = xpp.getAttributeValue(null, "poster");
                         publishProgress(70);
-                        String iconFile = iconName + ".png";
+                        //String iconFile = movieTitle + ".png";
 //                        if (fileExistance(iconFile)) {
 //                            FileInputStream inputStream = null;
 //                            try {
@@ -245,61 +239,51 @@ public class MovieDetail extends Activity {
 //                            moviePoster = BitmapFactory.decodeStream(inputStream);
 //                            Log.i(ACTIVITY_NAME, "Image already exists");
 //                        } else {
-                            //Bitmap image  = HTTPUtils.getImage(ImageURL);
+                        //Bitmap image  = HTTPUtils.getImage(ImageURL);
 
-                            URL iconUrl = new URL(movieURL + iconName + ".png");
-                            moviePoster = getImage(iconUrl);
-                            FileOutputStream outputStream = openFileOutput(iconName + ".png", Context.MODE_PRIVATE);
-                            moviePoster.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
-                            outputStream.flush();
-                            outputStream.close();
-                            Log.i(ACTIVITY_NAME, "Add a new image");
-
-                        //}
-                            break;
+                        URL iconUrl = new URL(movieURL + movieTitle + ".png");
+                        moviePoster = getImage(iconUrl);
+                        FileOutputStream outputStream = openFileOutput(movieTitle + ".png", Context.MODE_PRIVATE);
+                        moviePoster.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
+                        outputStream.flush();
+                        outputStream.close();
+                        Log.i(ACTIVITY_NAME, "Add a new image");
+                        break;
                     }
                 }
-            }catch(MalformedURLException urlEX){
+            } catch (MalformedURLException urlEX) {
                 urlEX.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (XmlPullParserException e) {
                 e.printStackTrace();
             }
-
             publishProgress(100);
             Log.i(ACTIVITY_NAME, "In doInBackground");
             return null;
-//
-
         }
-
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-
             movieProgressBar.setVisibility(View.VISIBLE);
             movieProgressBar.setProgress(values[0]);
             Log.i(ACTIVITY_NAME, "In onProgressUpdate");
-
         }
 
+        /**
+         * show all message in view
+         *
+         * @param string
+         */
         @Override
         protected void onPostExecute(String string) {
-
-            //movieDetailTitle.setText(stringBuilder);
-            //progressDialog.dismiss();
-
-            movieDetailTitle.setText(movieDetailTitle.getText()+": "+movieTitle);
-            movieDetailYear.setText(movieDetailYear.getText()+": "+movieYear);
-            movieDetailRating.setText(movieDetailRating.getText()+": "+movieRating);
-            movieDetailRuntime.setText(movieDetailRuntime.getText()+": "+movieRuntime);
-            movieDetailMainActors.setText(movieDetailMainActors.getText()+": "+movieMainActors);
-            movieDetailPlot.setText(movieDetailPlot.getText()+": "+moviePlot);
-            movieDetailURL.setText(movieDetailURL.getText()+": "+movieURL);
-
-//            movieTit = movieDetailTitle.getText()+": "+movieTitle;
-//            movieDes = movieDetailPlot.getText()+": "+moviePlot;
+            movieDetailTitle.setText(movieDetailTitle.getText() + ": " + movieTitle);
+            movieDetailYear.setText(movieDetailYear.getText() + ": " + movieYear);
+            movieDetailRating.setText(movieDetailRating.getText() + ": " + movieRating);
+            movieDetailRuntime.setText(movieDetailRuntime.getText() + ": " + movieRuntime);
+            movieDetailMainActors.setText(movieDetailMainActors.getText() + ": " + movieMainActors);
+            movieDetailPlot.setText(movieDetailPlot.getText() + ": " + moviePlot);
+            movieDetailURL.setText(movieDetailURL.getText() + ": " + movieURL);
 
             imageMovie.setImageBitmap(moviePoster);
             movieProgressBar.setVisibility(View.INVISIBLE);

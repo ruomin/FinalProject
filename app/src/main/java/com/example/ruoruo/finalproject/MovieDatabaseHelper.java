@@ -5,11 +5,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class MovieDatabaseHelper extends SQLiteOpenHelper {
-
+    /**
+     * declare database
+     */
     public static String DATABASE_NAME = "MovieDataBase";
-    public static int VERSION_NUM = 2;
+    public static int VERSION_NUM = 3;
     public static final String TABLE_NAME = "MovieTable";
-
     public static final String KEY_MOVIE_ID = "id";
     public static final String KEY_MOVIE_TITLE = "title";
     public static final String KEY_MOVIE_YEAR = "year";
@@ -18,8 +19,10 @@ public class MovieDatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_MOVIE_MAIN_ACTORS = "mainActors";
     public static final String KEY_MOVIE_PLOT = "plot";
     public static final String KEY_MOVIE_URL = "url";
-
-    public static final String SQL_MOVIE_CREATE ="CREATE TABLE "
+    /**
+     * create table
+     */
+    public static final String SQL_MOVIE_CREATE = "CREATE TABLE "
             + TABLE_NAME
             + "( "
             + KEY_MOVIE_ID
@@ -40,7 +43,7 @@ public class MovieDatabaseHelper extends SQLiteOpenHelper {
             + " TEXT "
             + ");";
 
-    public MovieDatabaseHelper( Context ctx) {
+    public MovieDatabaseHelper(Context ctx) {
         super(ctx, DATABASE_NAME, null, VERSION_NUM);
     }
 
@@ -56,7 +59,7 @@ public class MovieDatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public  void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion){
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }

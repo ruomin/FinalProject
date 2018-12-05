@@ -2,88 +2,82 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    tools:context=".MovieDetail">
+    tools:context=".MovieInformation"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
 
     <Button
-        android:id="@+id/saveMovieButton"
+        android:id="@+id/backMovieButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SaveButton"
-        android:textColor="#9966FF"/>
+        android:text="@string/backMovieButton"
+        android:textColor="#66ccff"/>
 
     <ImageView
-        android:id="@+id/imageMoveDetail"
+        android:id="@+id/imageMoveInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
 
     <TextView
-        android:id="@+id/MovieDetailTitle"
+        android:id="@+id/MovieInfoTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Title"
         android:textSize="30dp"
-        android:textColor="#00CCFF"
-        />
+        android:textColor="#FFCCCC"/>
 
     <TextView
-        android:id="@+id/MovieDetailYear"
+        android:id="@+id/MovieInfoYear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Year"
         android:textSize="30dp"
-        android:textColor="#00CCFF"/>
+        android:textColor="#FFCCCC"/>
 
     <TextView
-        android:id="@+id/MovieDetailRating"
+        android:id="@+id/MovieInfoRating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Rating"
         android:textSize="30dp"
-        android:textColor="#00CCFF"/>
+        android:textColor="#FFCCCC"/>
 
     <TextView
-        android:id="@+id/MovieDetailRuntime"
+        android:id="@+id/MovieInfoRuntime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Runtime"
         android:textSize="30dp"
-        android:textColor="#00CCFF"/>
+        android:textColor="#FFCCCC"/>
 
     <TextView
-        android:id="@+id/MovieDetailMainActors"
+        android:id="@+id/MovieInfoMainActors"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="main actors"
         android:textSize="30dp"
-        android:textColor="#00CCFF"/>
+        android:textColor="#FFCCCC"/>
 
     <TextView
-        android:id="@+id/MovieDetailPlot"
+        android:id="@+id/MovieInfoPlot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="plot"
-        android:textColor="#00CCFF"
+        android:textSize="20dp"
+        android:textColor="#FFCCCC"
         />
 
     <TextView
-        android:id="@+id/MovieDetailURL"
+        android:id="@+id/MovieInfoURL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="URL"
-        android:textColor="#00CCFF"
+        android:textSize="20dp"
+        android:textColor="#FFCCCC"
         />
 
-
-
-    <ProgressBar
-        android:id="@+id/movieProgressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>

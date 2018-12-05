@@ -62,10 +62,6 @@ public class MainActivity extends Activity {
                 Log.i(ACTIVITY_NAME, "In onClick()");
             }
         });
-
-
-
-
     }
 
     @Override

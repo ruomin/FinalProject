@@ -27,7 +27,8 @@
         <activity android:name=".CBCDetail" />
         <activity android:name=".MovieActivity" />
         <activity android:name=".MovieDetail" />
-        <activity android:name=".Toolbar"></activity>
+        <activity android:name=".Toolbar" />
+        <activity android:name=".MovieInformation"></activity>
     </application>
 
 </manifest>

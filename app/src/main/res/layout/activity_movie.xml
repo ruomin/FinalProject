@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorPrimary"
     tools:context=".MovieActivity">
 
     <android.support.v7.widget.Toolbar
@@ -39,18 +40,33 @@
                 android:layout_below="@+id/searchMovieTittle"
                 android:text="@string/RecommendedMovie" />
 
+            <Button
+                android:id="@+id/buttonStatisticsMovie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/recommendedMovie"
+                android:text="@string/statisticsMovie" />
+
+            <TextView
+                android:id="@+id/statisticsMovie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/buttonStatisticsMovie"
+                android:background="@color/colorAccent"
+                />
+
             <ListView
                 android:id="@+id/listViewMovie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/recommendedMovie"
+                android:layout_below="@+id/statisticsMovie"
                 />
 
             <FrameLayout
                 android:id="@+id/testFragment"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
-                android:layout_below="@+id/recommendedMovie">
+                android:layout_below="@+id/buttonStatisticsMovie">
 
             </FrameLayout>
 

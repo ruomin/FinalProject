@@ -31,8 +31,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".MovieFragment" />
-        <activity android:name=".CBC_frame" />
-        <activity android:name=".CBCDetail"></activity>
+        <activity android:name=".AtyCbcMain"/>
+        <activity android:name=".AtyCbcCount"/>
+        <activity android:name=".AtyCbcDetail"/>
+        <activity android:name=".AtyCbcWeb"/>
+
     </application>
 
 </manifest>

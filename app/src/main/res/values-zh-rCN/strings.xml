@@ -21,4 +21,6 @@
     <string name="cbc_button_frame"> 前往Frame Layout</string>
     <string name="cbc_frame_change_button">变化布局</string>
     <string name="cbc_asy_button">AsyncTask</string>
+    <string name="cbc_item_help">帮助</string>
+    <string name="cbc_item_exit">退出</string>
 </resources>

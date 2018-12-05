@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
         cbc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CBC.class);
+                Intent intent = new Intent(MainActivity.this, AtyCbcMain.class);
                 startActivity(intent);
                 Log.i(ACTIVITY_NAME, "In onClick()");
             }

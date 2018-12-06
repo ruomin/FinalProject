@@ -34,6 +34,14 @@
     <string name="cbc_item_help">Help</string>
     <string name="cbc_item_exit">Exit</string>
     <string name="cbc_detail_alert">Read Error, please check the file name!</string>
+    <string name="cbc_title">Title:</string>
+    <string name="cbc_guid">Guid:</string>
+    <string name="cbc_load">Loading</string>
+    <string name="cbc_pubDate">public Date :</string>
+    <string name="cbc_author">Author :</string>
+    <string name="cbc_category">category :</string>
+    <string name="cbc_link">Link :</string>
+    <string name="cbc_go">Go Link :</string>
     <!--Nutrition-->
     <string name="NutritionButton">Nutrition</string>
     <string name="Hint">Search Database</string>

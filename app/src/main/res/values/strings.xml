@@ -21,6 +21,8 @@
     <string name="home_message">Well Come Back To Home</string>
 
 
+
+
     <!--CBCNEWS-->
     <string name="cbc_search">Search</string>
     <string name="cbc_editText">Type the title of the article</string>
@@ -49,8 +51,14 @@
     <string name="cbc_exit">Exit</string>
     <!--Nutrition-->
     <string name="NutritionButton">Nutrition</string>
-    <string name="Hint">Search Database</string>
-    <string name="ExitButton">Exit</string>
-
+    <string name="HintNutrition">Search Database</string>
+    <string name="ExitButtonNutrition">Exit</string>
+    <string name="FragmentButton">Fragment Image</string>
+    <string name="Information">Author is James Barclay \n Version: 2.1 \n This Application allows you to do research on nutritional facts and save it to your favorites</string>
+    <string name="Title">Help</string>
+    <string name="cancelNutrition">Cancel</string>
+    <string name="ApiButton">NutritionDatabase</string>
+    <string name="NewExitButton">Exit</string>
+    <string name="HelpToolBar">Help</string>
 
 </resources>

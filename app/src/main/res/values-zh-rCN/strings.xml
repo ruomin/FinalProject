@@ -37,4 +37,15 @@
     <string name="cbc_save">保存</string>
     <string name="cbc_total">总计</string>
     <string name="cbc_exit">退出</string>
+
+    <string name="NutritionButton">营养</string>
+    <string name="HintNutrition">搜索数据库</string>
+    <string name="ExitButtonNutrition">退出</string>
+    <string name="FragmentButton">画面</string>
+    <string name="Information">作者：James Barclay \n 版本: 2.1 \n 本应用允许你搜索和保存你喜爱的食物</string>
+    <string name="Title">帮助</string>
+    <string name="cancelNutrition">取消</string>
+    <string name="ApiButton">营养数据库</string>
+    <string name="NewExitButton">退出</string>
+    <string name="HelpToolBar">帮助</string>
 </resources>

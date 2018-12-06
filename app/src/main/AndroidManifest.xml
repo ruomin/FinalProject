@@ -19,7 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Nutrition" />
         <activity android:name=".OCTranspo" />
         <activity android:name=".Movie" />
         <activity android:name=".MovieDetail">
@@ -34,6 +33,11 @@
         <activity android:name=".AtyCbcCount"/>
         <activity android:name=".AtyCbcDetail"/>
         <activity android:name=".AtyCbcWeb"/>
+        <activity android:name=".FoodNetActivity" />
+        <activity android:name=".FoodLocalActivity" />
+        <activity android:name=".FoodDetailActivity" />
+        <activity android:name=".FoodTotalActivity" />
+        <activity android:name=".Nutrition"/>
 
     </application>
 

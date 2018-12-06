@@ -37,11 +37,16 @@
     <string name="cbc_title">Title:</string>
     <string name="cbc_guid">Guid:</string>
     <string name="cbc_load">Loading</string>
-    <string name="cbc_pubDate">public Date :</string>
+    <string name="cbc_pubDate">Public Date :</string>
     <string name="cbc_author">Author :</string>
-    <string name="cbc_category">category :</string>
+    <string name="cbc_category">Category :</string>
     <string name="cbc_link">Link :</string>
     <string name="cbc_go">Go Link :</string>
+    <string name="cbc_desC">Description :</string>
+    <string name="cbc_des">Go description :</string>
+    <string name="cbc_save">Save</string>
+    <string name="cbc_total">Total for Saving</string>
+    <string name="cbc_exit">Exit</string>
     <!--Nutrition-->
     <string name="NutritionButton">Nutrition</string>
     <string name="Hint">Search Database</string>

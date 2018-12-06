@@ -24,4 +24,17 @@
     <string name="cbc_item_help">帮助</string>
     <string name="cbc_item_exit">退出</string>
     <string name="cbc_detail_alert">读取错误，请检查文件名</string>
+    <string name="cbc_title">标题:</string>
+    <string name="cbc_guid">序列号:</string>
+    <string name="cbc_load">缓存中</string>
+    <string name="cbc_pubDate">发布日期 :</string>
+    <string name="cbc_author">作者 :</string>
+    <string name="cbc_category">类别 :</string>
+    <string name="cbc_link">链接 :</string>
+    <string name="cbc_go">转到 :</string>
+    <string name="cbc_desC">描述 :</string>
+    <string name="cbc_des">转到描述 :</string>
+    <string name="cbc_save">保存</string>
+    <string name="cbc_total">总计</string>
+    <string name="cbc_exit">退出</string>
 </resources>
